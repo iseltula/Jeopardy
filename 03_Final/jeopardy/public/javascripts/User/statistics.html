@@ -1,0 +1,58 @@
+<!-- Games List-->
+<div class="page-header" ng-init="init()">
+	<h1>Gamelist for Jeopardy</h1>
+</div>
+
+
+<table class="table table-bordered">
+	<tr>
+		<td>Name</td>
+		<td>Status</td>
+		<td>Operation</td>
+	<tr>
+	<tr ng-repeat="g in games">
+		<td>Game {{g._id}}</td>
+		<td>
+			<div class="label label-warning btn-block" ng-show="g.game.state == 'building'">Building</div>
+			<div class="label label-info btn-block" ng-show="g.game.state == 'inGame'">Playing</div>
+			<div class="label label-success btn-block" ng-show="g.game.state == 'finished'">Finished</div>
+		</td>
+		<td>
+			<button ng-click="chooseGame(g)" class="btn btn-primary">Choose</button>
+		</td>
+	</tr>
+</table>
+
+<div>
+	<div ng-hide="chosengame == null">
+		<h3>Gamestatistic for Game {{chosengameId._id}}</h3>
+		Players:
+		<table class="table table-bordered">
+    		<tr> <td>Position</td><td>Names</td><td>Points</td> </tr>
+    		<tr ng-repeat="pl in chosengame.player | orderBy:'-points'">
+    			<td>{{$index+1}}</td><td>{{pl.name}}</td><td>{{pl.points}}</td>
+    		</tr>
+    	</table>
+
+    	{{chosengame.numberOfQuestions - chosengame.numberOfOpenQuestions}} of {{chosengame.numberOfQuestions}} Questions answered
+    	<div class="progress">
+		  	<div 	class="progress-bar progress-bar-success" 
+		  			role="progressbar" 
+		  			aria-valuenow={{chosengame.numberOfOpenQuestions}} 
+		  			aria-valuemin="0" aria-valuemax={{chosengame.numberOfQuestions}} 
+		  			style="width: {{(chosengame.numberOfQuestions -chosengame.numberOfOpenQuestions)*100/chosengame.numberOfQuestions}}% ;">
+		  		<span>{{Math.round(  (chosengame.numberOfQuestions - chosengame.numberOfOpenQuestions )*100/chosengame.numberOfQuestions )}}%</span>
+		  	</div>
+		</div>
+
+	</div>
+
+	
+
+
+</div>
+
+
+
+	    
+

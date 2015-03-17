@@ -1,0 +1,38 @@
+<!-- Games List-->
+<div class="page-header" ng-init="init()">
+	<h1>Gamelist for Jeopardy</h1>
+</div>
+
+
+<table class="table table-bordered">
+	<tr>
+		<td>Name</td>
+		<td>Status</td>
+		<td>Operation</td>
+	<tr>
+	<tr ng-repeat="g in games">
+		<td>Game {{g._id}}</td>
+		<td>
+			
+			<div class="label label-warning btn-block" ng-show="g.game.state == 'building'">Building</div>
+			<div class="label label-info btn-block" ng-show="g.game.state == 'inGame'">Playing</div>
+			<div class="label label-success btn-block" ng-show="g.game.state == 'finished'">Finished</div>
+		</td>
+		<td>
+			<button ng-click="chooseGame(g)" class="btn btn-primary">Choose</button>
+		</td>
+		<td>
+			<button ng-click="newGame()" class="btn btn-primary">New Game</button>
+		</td>
+		<td>
+			<button ng-click="deleteGame(g)" class="btn btn-primary">Delete</button>
+		</td>
+		
+	</tr>
+</table>
+
+
+
+
+	    
+

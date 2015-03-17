@@ -1,0 +1,28 @@
+﻿<div class="col-md-6 col-md-offset-1 ng-scope">
+    <h1 class="text-"> Login</h1>
+    <form class="form-horizontal" role="form">        
+      <div class="form-group">
+        <label class="col-sm-3 control-label">UserName</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" placeholder="mail@domain.com" ng-model="userName">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Password</label>
+        <div class="col-sm-6">
+          <input type="password" class="form-control" placeholder="Password" ng-model="password">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-sm-5 text-center">
+          <button type="submit" class="btn btn-default" ng-click="login()">Login</button>
+        </div>
+        <div class="col-sm-5 text-center">
+          <button type="submit" class="btn btn-default" ng-click="register()">Register</button>
+        </div>
+      </div>
+
+    </form>
+</div>

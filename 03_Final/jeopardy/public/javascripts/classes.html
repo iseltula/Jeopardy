@@ -1,0 +1,169 @@
+      <div class="page-header">
+        <h1 class="text-center"> </h1>
+      </div>
+
+      <div class="col-md-12">
+
+        <h1 class="text-center"> Selected </h1>
+
+        <!-- -------------------------------Classes Selected------------------- -->
+        <div class="col-md-4">
+          <form class="form-horizontal" role="form">        
+            <div class="form-group">
+              <label class="col-sm-4 control-label">Class Name</label>
+              <div class="col-sm-7">
+                <input type="text" class="form-control" placeholder="Class Name" ng-model="selectedClassObj.classObjName">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <div class="col-sm-4 text-center">
+                <button type="submit" class="btn btn-default" ng-click="modifyClass()">Modify</button>
+              </div>
+              <div class="col-sm-4 text-center">
+                <button type="submit" class="btn btn-default" ng-click="removeClass()">Remove</button>
+              </div>
+
+              <div class="col-sm-4 text-center">
+                <button type="submit" class="btn btn-default" ng-click="createClass()">Create</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+       <!-- -------------------------------Categories Selected------------------- -->
+        <div class="col-md-4">
+          <div ng-show="selectedClassObj._id">    
+            <form class="form-horizontal" role="form">        
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Category Name</label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" placeholder="Category Name" ng-model="selectedCategory.categoryName">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="modifyCategory()">Modify</button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="removeCategory()">Remove</button>
+                </div>
+
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="createCategory()">Create</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- ------------------------------- Fields Selected------------------- -->
+        <div class="col-md-4">
+          <div ng-show="selectedCategory._id">    
+            <form class="form-horizontal" role="form">        
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Field Question </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" placeholder="Field Question" ng-model="selectedField.question">
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label class="col-sm-4 control-label">Field Answer </label>
+                <div class="col-sm-7">
+                  <input type="text" class="form-control" placeholder="Field Answer" ng-model="selectedField.answer">
+                </div>
+              </div>
+              
+
+              <div class="form-group">
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="modifyField()">Modify</button>
+                </div>
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="removeField()">Remove</button>
+                </div>
+
+                <div class="col-sm-4 text-center">
+                  <button type="submit" class="btn btn-default" ng-click="createField()">Create</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- -------------------------------Classes------------------- -->
+      
+      <div class="col-md-4">
+        
+
+        <h1 class="text-center"> Classes </h1>
+        <table class="table" >
+          <tr>
+            <th>class Name</th>
+          </tr>
+            
+          <tr ng-repeat="classObj in classesObj" ng-click="selectClass(classObj)">
+            
+            <td class="active" ng-show="classObj._id == selectedClassObj._id" >
+                {{classObj.classObjName}}
+            </td>
+            <td ng-hide="classObj._id == selectedClassObj._id"> 
+              {{classObj.classObjName}}
+            </td>
+            
+          </tr>          
+        </table>
+
+      </div>
+      
+
+      <!-- -------------------------------Categories------------------- -->
+
+
+
+      <div class="col-md-4">
+        <div ng-show="categories[0].categoryName">  
+          <h1 class="text-center"> Categories </h1>
+          <table class="table" >
+            <tr>
+              <th>category Name</th>
+            </tr>
+              
+            <tr ng-repeat="category in categories track by $index" ng-click="selectCategory(category)" ng-show="category.categoryName">
+              <td class="active" ng-show="category._id == selectedCategory._id" >
+                {{category.categoryName}}
+              </td>
+              <td ng-hide="category._id == selectedCategory._id"> {{category.categoryName}}</td>
+            </tr>          
+          </table>
+        </div>
+      </div>
+      
+      <!-- ------------------------------- Fields ------------------- -->
+
+
+
+      <div class="col-md-4">        
+        <div ng-show="fields[0].question">
+          <h1 class="text-center"> Fields </h1>
+          <table class="table" >
+            <tr>
+              <th>Field Question</th>
+            </tr>
+              
+            <tr ng-repeat="field in fields track by $index" ng-click="selectField(field)" 
+            ng-show="field.question">
+              <td class="active" ng-show="field._id == selectedField._id" > {{field.question}}</td>
+              <td  ng-hide="field._id == selectedField._id" >  {{field.question}}</td>
+
+            </tr>          
+          </table>
+        </div>
+
+      </div>

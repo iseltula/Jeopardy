@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <a href="/users/listUsers"> list Users </a> <br>
+    <a href="/users/removeAll"> remove Users </a> <br>
+    <a href="/users/initUsers"> init Users </a> <br>
+    <br>
+    <br>
+    <h1> Register</h1>
+    <form action="/users/add" method="post">
+    	UserId: <input type="text" name="userid"> </input> <br>
+    	Password: <input type="password" name="password"> </input><br>
+    	First Name: <input type="text" name="firstname"> </input><br>
+    	Last Name: <input type="text" name="lastname"> </input><br>
+    	<input type="submit" value="Register">
+    </form>
+    <br>
+    <br>
+     <h1> Login </h1>
+    <form action="/users/login" method="post">
+    	UserId: <input type="text" name="userid"> </input> <br>
+    	Password: <input type="password" name="password"> </input><br>
+    	<input type="submit" value="Log In">
+    </form>
+
+    <br>
+    <br>
+     <h1> Remove </h1>
+    <form action="/users/remove" method="post">
+    	UserId: <input type="text" name="userid"> </input> <br>
+    	<input type="submit" value="Remove">
+    </form>
+
+
+  </body>
+</html>

@@ -1,0 +1,274 @@
+
+<!----------------CONFG TEMPLATE-------------->
+
+	<div ng-init="initClasses()"> </div>	
+	<div ng-show="selec.state == 'building'">
+	    <div class="page-header">
+	      <h1>Game Configuration for Jeopardy</h1>
+	    </div>
+	    
+	    
+
+		<div class="col-md-12">
+	        <!-- =============================================== -->
+	        <!-- ALL OUR CHECKBOXES AND RADIO BOXES WILL GO HERE -->
+	        <!-- =============================================== -->
+	        
+	        <!-- MULTIPLE CHECKBOXES -->
+			<h1 class=" col-md-9 col-md-offset-3">Class Selection</h1>
+
+			
+		    
+
+
+		    <!--Looking for specific Topics with search Linea-->
+		    <div class="col-md-3  form-group">
+			    <h3> Search the Categories</h3>
+			    
+			    <input type="text" ng-model="search" placeholder="Search for Class">
+
+			    <div ng-repeat="classObj in classesObj | orderBy:'classObjName'">
+					{{classObj.classObjName}}:
+					<div ng-repeat="category in classObj.categories | filter:search">
+
+						<label class="checkbox-inline">
+		            		<input 	type="checkbox" 
+		            				checklist-model="selec.categories" 
+		            				checklist-value="{classObjName: classObj.classObjName, category: category}" 
+		            				ng-disabled="selec.categories.length == 6"> 
+		            				{{category.categoryName}}
+		            	</label>		        	
+					</div>					
+			    </div>
+		    </div>
+
+		    <div class="  col-md-5 ">
+			    <h3> Select the Categories</h3>
+			    <div class="  col-md-6 ">
+				    <div class="btn-group">
+				    	<div ng-repeat="classObj in classesObj | orderBy:'classObjName'">
+						    <label class="checkbox-inline">
+						    	<input type="radio" name="options" autocomplete="off" ng-model="selec.classObj" ng-value="classObj"> {{classObj.classObjName}}
+						  	</label>
+						</div>
+					</div>
+				</div>
+				<div class=" col-md-6 ">
+		        	<div class="btn-group" ng-show="selec.classObj.classObjName">
+	          			Category Selection of {{selec.classObj.classObjName}}:
+						
+						<div ng-repeat="category in selec.classObj.categories | orderBy:'categoryName'">
+								<label class="checkbox-inline">
+				            		<input type="checkbox" checklist-model="selec.categories" 
+				            		checklist-value="{classObjName: selec.classObj.classObjName, category: category}" ng-disabled="selec.categories.length == 6"> {{category.categoryName}}
+				            	</label>			            	
+						</div>						
+				  	</div>
+				</div>
+		    </div>
+
+
+			<div class=" col-md-4 ">
+				<h3>Our Selected Categories:</h3>
+			    {{selec.categories.length}} of 6 selected:
+			    
+			    <div ng-repeat="category in selec.categories">
+			    	{{category.classObjName}}: &nbsp;{{category.category.categoryName}}      
+			        
+			    </div>
+			</div>		    
+	    </div>
+
+	     <!--Selected Info-->
+	   
+
+
+	     <!--Selected Players-->
+	    <div class="col-md-12">
+	        <div class="row">
+			    
+			    <div class="col-md-6">
+			  		<form ng-submit="putList()">
+			  	 		<h2>Please add the Teams</h2>
+			  	 		<input type="text" ng-model="buff" placeholder="Text and enter">
+			  	 	</form>
+			  	</div>
+
+				<div class="col-md-6">		    
+				    <h2>Added Teams:</h2>
+				    <h3>{{selec.player.length}} added:</h3>
+				    <span style="font-size:20px; margin-left:10px;">
+				    	
+				    </span>
+				    <div ng-repeat="pl in selec.player">
+				    	<span style="font-size:15px; margin-left:20px;">
+				        	{{pl.name}}     
+				        </span>
+				    </div>
+				</div>
+			    
+			</div>
+			    
+<br>
+<br>
+	    </div>
+	    <!-- END SELECTED PLAYERS -->
+
+	    <div class="col-md-12">
+			<div class="form-group">
+		      <div class="col-sm-3 text-center">
+		        <button type="submit" class="btn btn-danger btn-lg"  ng-click="addGame()">
+					Start Game
+				</button>	    	
+		      </div>
+		      <div class="col-sm-3 text-center">
+		        <button type="submit" class="btn btn-primary btn-lg"  ng-click="saveGame()">
+					Save Game
+				</button>	    	
+		      </div>      
+		      <div class="col-sm-3 text-center">
+		        <button type="submit" class="btn btn-primary btn-lg"  ng-click="newGame()">
+					New Game
+				</button>	    	
+		      </div>
+		      <div class="col-sm-3 text-center">
+		        <button type="submit" class="btn btn-primary btn-lg"  ng-click="deleteGame()">
+					Delete Game
+				</button>	    	
+		      </div>
+		    </div>
+		    <br>
+		    <br><br><br><br><br>
+		   
+
+		    <!-- SHOW OFF OUR FORMDATA OBJECT -->		    
+	    </div>
+	    
+
+	</div>
+
+
+<!------------------------------END SKRIPT CONFIG ----------------------------------->
+
+
+<!------------------------------BEGIN GAME ENGINE --- -------------------------------->
+
+<div ng-show="selec.state == 'inGame'">  	    
+	<div class="col-md-12">
+	    <div class="page-header">
+	      <h1 class="text-center">Jeopardy Game</h1>
+	    </div>
+    	{{myArray}}
+	    <div>{{selec.numberOfOpenQuestions}} of {{selec.numberOfQuestions}} Questions left.</div>
+		<table class="table table-bordered" >
+			<tr>
+				<td class="field-label col-xs-3 active" ng-repeat="g in selec.categories">
+					{{g.category.categoryName}}
+				</td>
+			</tr>
+			<tr ng-repeat="i in selec.myArray">
+				<td class="field-label col-xs-3 active" 
+					ng-repeat="g in selec.categories">
+					<!--Several Design for several conditions-->
+					<button 	class="btn btn-primary btn-block" 
+						ng-click="showQuestion(g.category.fields[i], 5*(i+1))"
+						ng-disabled="actual != ''"
+						ng-hide="g.category.fields[i].stat == 'show' || g.category.fields[i].stat == 'done' || !g.category.fields[i].question">
+
+						<span>{{5*(i+1)}}</span>
+					</button>
+					<button 	class="btn btn-success btn-block" style="width:100%"
+						ng-show="g.category.fields[i].stat == 'show'">
+
+						<span>{{5*(i+1)}}</span>
+					</button>
+					<button 	class="btn btn-info btn-block" style="width:100%"
+						ng-show="g.category.fields[i].stat == 'done'">
+
+						<span>{{5*(i+1)}}</span>
+					</button>
+
+
+
+				</td>
+			</tr>
+		</table>
+
+
+
+		<h2>Question</h2>
+	    <pre>
+	        {{ actual.question }}
+	    </pre>
+
+	    <!--Players-->
+	    <h2>Players</h2>
+	    <table class="table table-bordered">
+	    	<tr ng-repeat="pl in selec.player">
+			    <td >
+
+			    	<a 	class="btn btn-danger" ng-hide="player == pl" ng-click="showAnswer(pl)" ng-disabled="player != '' || actual =='' "
+			    		ng-show="player == pl">
+			    	
+			    	 	{{pl.name}} con {{pl.points}} punctos
+			    	</a>
+			    	<a class="btn btn-success" ng-show="player == pl">
+			    	 	{{pl.name}} con {{pl.points}} punctos
+			    	</a>
+			    </td>
+		    </tr>
+	    </table>
+
+	    <!--Point Calculation-->
+	    <scan ng-hide="player == ''">
+	    	<table class="table table-bordered">
+	    		<tr>
+	    			<td ng-click="addPuncts()"><span class="glyphicon glyphicon-plus">{{actual.val}}</span></td>
+	    			<td ng-click="subPuncts()"><span class="glyphicon glyphicon-minus">{{actual.val}}</span></td>
+	    		</tr>
+
+	    	</table>
+	    </scan>
+
+	   
+
+	    <div ng-show="solutionShow" ng-click="BacktoField()">
+	    	<h2>Answer</h2>
+	    	
+		    <pre>
+		    Felizidades: {{player.name}} got {{actual.val}} Points for the correct Answer: <br/>
+		     {{ actual.answer}}
+		    </pre>
+	    
+	    </div>
+
+
+	    <!--Save and return-->
+	    <a class="btn btn-primary" ng-click="SaveAndGoBack()" ng-disabled="actual != ''">Save and back to User Menu</a>
+
+	<br>
+<br>
+<br>
+<br>	    
+	</div>
+	<br>
+
+</div>
+
+ <!--End of Game Table-->
+<div ng-show="selec.state == 'finished'">  
+	<h2>Game Finished</h2>
+	<table class="table table-bordered">
+		<tr> <td>Position</td><td>Names</td><td>Points</td> </tr>
+		<tr ng-repeat="pl in selec.player | orderBy:'-points'">
+			<td>{{$index+1}}</td><td>{{pl.name}}</td><td>{{pl.points}}</td>
+		</tr>
+	</table>
+	<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <a href="/classes/listClasses"> list Classes </a> <br>
+    <a href="/classes/removeClasses"> remove Classes </a> <br>
+    <a href="/classes/initClasses"> init Classes </a> <br>
+    <br>
+    <br>
+    <h1> Create</h1>
+    <form action="/classes/add" method="post">
+    	Class Name: <input type="text" name="classObjName"> </input> <br>
+    	Cat1 Name: <input type="text" name="catName"> </input><br>
+    	Cat2 Name: <input type="text" name="catName2"> </input><br>
+    	Cat3 Name: <input type="text" name="catName3"> </input><br>
+    	<input type="submit" value="Create">
+    </form>
+    <br>
+    <br>
+    <h1> Remove </h1>
+    <form action="/classes/remove" method="post">
+    	Class Name: <input type="text" name="className"> </input> <br>
+        Cat Name: <input type="text" name="catName"> </input> <br>
+    	<input type="submit" value="Remove">
+    </form>
+
+
+  </body>
+</html>

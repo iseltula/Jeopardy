@@ -1,0 +1,100 @@
+<div class="page-header">
+        <h1 class="text-center">Users</h1>
+      </div>
+      
+      <div class="col-md-6">
+        <h1 class="text-center"> Table of Users </h1>
+        <table class="table" >
+          <tr>
+            <th>userid</th>
+            <th>password</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>activated</th>
+          </tr>
+
+
+          <tr ng-repeat="user in users" ng-click="selectUser(user)">
+            <td class="active" ng-show="user._id == selectedUser._id" >
+              {{user.userid}}
+            </td>
+            <td ng-hide="user._id == selectedUser._id"> 
+              {{user.userid}}
+            </td>
+            <td class="active" ng-show="user._id == selectedUser._id" >
+              {{user.password}}
+            </td>
+            <td ng-hide="user._id == selectedUser._id"> 
+              {{user.password}}
+            </td>
+            <td class="active" ng-show="user._id == selectedUser._id" >
+              {{user.firstname}}
+            </td>
+            <td ng-hide="user._id == selectedUser._id"> 
+              {{user.firstname}}
+            </td>
+            <td class="active" ng-show="user._id == selectedUser._id" >
+              {{user.lastname}}
+            </td>
+            <td ng-hide="user._id == selectedUser._id"> 
+              {{user.lastname}}
+            </td>
+            <td class="active" ng-show="user._id == selectedUser._id" >
+              {{user.activated}}
+            </td>
+            <td ng-hide="user._id == selectedUser._id"> 
+              {{user.activated}}
+            </td>
+          </tr>  
+
+
+        </table>
+
+      </div>
+      <div class="col-md-5 col-md-offset-1">
+        <h1 class="text-center"> Selected User </h1>
+        
+        <form class="form-horizontal" role="form">        
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Userid</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" placeholder="Userid" ng-model="selectedUser.userid">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Password</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" placeholder="Password" ng-model="selectedUser.password">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-4 control-label">First Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" placeholder="First Name" ng-model="selectedUser.firstname">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Last Name</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-control" placeholder="Last Name" ng-model="selectedUser.lastname">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="btn btn-default" ng-click="modifyUser()">Modify</button>
+            </div>
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="btn btn-default" ng-click="removeUser()">Remove</button>
+            </div>
+
+            <div class="col-sm-4 text-center">
+              <button type="submit" class="btn btn-default" ng-click="createUser()">Create</button>
+            </div>
+          </div>
+
+        </form>
+      </div>

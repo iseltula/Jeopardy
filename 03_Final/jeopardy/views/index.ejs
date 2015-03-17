@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Jeopardy!</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="/javascripts/angular-ui-router.js"></script>
+    <script src="/javascripts/User/checklist-model.js"></script>  
+    <script src="/javascripts/classes.js"></script>
+    <script src="/javascripts/User/angularUser.js"></script>
+    
+  </head>
+  <body ng-app="userInterface">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+      <div class="page-header">
+        <h1>Jeopardy!</h1>
+      </div>
+      <nav class="navbar navbar-inverse" role="navigation">
+        <ul class="nav navbar-nav">
+          <li ><a ui-sref="user">User</a></li>
+          <li ><a ui-sref="classes">Classes</a></li>
+          <li ><a ui-sref="games">Games</a></li>
+          <li ><a ui-sref="current">Current Game</a></li>
+          <li ><a ui-sref="statistics">Statistics</a></li>
+          
+          <li ><a ui-sref="login">Login</a></li>
+          <li ><a ui-sref="register">Register</a></li>       
+          <li ><a ui-sref="logout">Logout</a></li>                        
+        </ul>       
+      </nav>
+        
+          
+        
+      <ui-view> </ui-view>
+      
+
+      </div>
+    </div>
+
+  </body>
+</html>
